@@ -1,4 +1,4 @@
-#include "BitmapReader.h"
+#include "C:\�˹�����\�����ȡ��������\BitmapReader.h"
 #include <io.h>
 
 void print_help() {
@@ -22,10 +22,10 @@ void print_help() {
 	printf("        %%DEFAULT_RGB%% + %%SCRAMBLE_RATE%% must be less than or equal to 256\n");
 	printf("        %%PICTURE_HEIGHT%% * %%PICTURE_WIDTH%% * log2(%%SCRAMBLE_RATE%%.x * %%SCRAMBLE_RATE%%.y * %%SCRAMBLE_RATE%%.z) must be more than bitcount(%%CONTENT%%)\n");
 	printf("Examples: \n");
-	printf("    TPEncoder -encode -t \"ジョジョ、繁gってのは嬬薦に�順があるな。鯵が玉い繁伏で僥んだことは、繁gは貨を的すれば的するほど、嚠豚せぬ並Bで貨が雲れ肇るってことだ。繁gを階えるものにならねばな。鯵は、繁gをやめるぞ、ジョジョ�\" test.bmp -h 28 -w 28 -d 0xff7f7f -s 0x010808\n");
+	printf("    TPEncoder -encode -t \"���祸�硢���g�äƤΤ��������޽礬����ʡ������̤�������ѧ������Ȥϡ����g�ϲߤ�Ū�����Ū����ۤɡ����ڤ����B�ǲߤ�����ȥ��äƤ��Ȥ������g�򳬤����Τˤʤ�ͤФʡ����ϡ����g����뤾�����祸�磡\" test.bmp -h 28 -w 28 -d 0xff7f7f -s 0x010808\n");
 	printf("    TPEncoder -decode -f test.bmp -d 0xff7f7f -s 0x010808\n");
 }
-//-encode -t "ジョジョ、繁gってのは嬬薦に�順があるな。鯵が玉い繁伏で僥んだことは、繁gは貨を的すれば的するほど、嚠豚せぬ並Bで貨が雲れ肇るってことだ。繁gを階えるものにならねばな。鯵は、繁gをやめるぞ、ジョジョ�" test.bmp -h 28 -w 28 -d 0xff7f7f -s 0x010808
+//-encode -t "���祸�硢���g�äƤΤ��������޽礬����ʡ������̤�������ѧ������Ȥϡ����g�ϲߤ�Ū�����Ū����ۤɡ����ڤ����B�ǲߤ�����ȥ��äƤ��Ȥ������g�򳬤����Τˤʤ�ͤФʡ����ϡ����g����뤾�����祸�磡" test.bmp -h 28 -w 28 -d 0xff7f7f -s 0x010808
 //-decode -f test.bmp -d 0xff7f7f -s 0x010808
 
 inline bool is2Pow(int x) { 
@@ -101,7 +101,7 @@ struct TPEncoderConfig {
 		} else {
 			int defaultRGB = -1;
 			sscanf(arg, "%x", &defaultRGB);
-			if(defaultRGB <= 0 || defaultRGB > 0xffffff) {
+			if(defaultRGB < 0 || defaultRGB > 0xffffff) {
 				throw "Value Error: Invalid default RGB value.";
 			}
 			dB = defaultRGB & 255; defaultRGB >>= 8;
@@ -116,7 +116,7 @@ struct TPEncoderConfig {
 		} else {
 			int scrambleRGB = -1;
 			sscanf(arg, "%x", &scrambleRGB);
-			if(scrambleRGB <= 0 || scrambleRGB > 0xffffff) {
+			if(scrambleRGB < 0 || scrambleRGB > 0xffffff) {
 				throw "Value Error: Invalid scramble RGB value.";
 			}
 			sB = scrambleRGB & 255; scrambleRGB >>= 8; if(sB == 0) sB = 0x100;
@@ -229,7 +229,7 @@ void __encode(TPEncoderConfig const& conf) {
 		}
 	}
 	
-	Bitmap24_Writer(conf.outputFilename, conf.picWidth, conf.picHeight, RGBs);
+	Bitmap24_Reader(conf.outputFilename, conf.picWidth, conf.picHeight, RGBs);
 }
 
 void encode(int argc, const char* argv[]) {
